@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MacPan</title>
+    </head>
+    <body>
+        <style>
+            *{
+                position: absolute;
+            }
+        </style>
+        <script src="createField.js"></script>
+        <script src="player.js"></script>
+        <script src="ghostAI.js"></script>
+        <script src="overlap.js"></script>
+        <script>
+            var player;
+            var ghost1;
+            var t;          
+            
+            document.addEventListener("keydown", windowKeyPress, false);
+            function windowKeyPress(e){
+                var k = e.keyCode;
+                if(k === 37){
+                    //left
+                    player.x -= player.speed;
+                } else if(k === 38){
+                    //up
+                    player.y -= player.speed;
+                } else if(k === 39){
+                    //right
+                    player.x += player.speed;
+                } else if(k === 40){
+                    //down
+                    player.y += player.speed;
+                } else {
+                    //probably do nothing
+                }
+                //console.log(player.x + " " + player.y);
+                player.loadCharacter();
+            }
+            
+            function randomMove(){
+                var x = Math.floor(Math.random()*5);
+                if(x !== 1){
+                    ghost1.move(player.x, player.y);
+                }
+                if(player.x-ghost1.x < 50 && ghost1.x-player.x < 50 && player.y-ghost1.y < 50 && ghost1.y-player.y < 50){
+                    clearInterval(t);
+                    console.log("end");
+                }
+            }
+            
+            window.onload = createField();
+            window.onload = function(){
+                player = new PlayerCharacter("default", 10, 50, 50);
+                player.loadCharacter();
+                ghost1 = new ghost("ghost1", 500, 500, 5, 100);
+                ghost1.loadGhost();
+                ghost1.move(player.x, player.y);
+                t = setInterval(randomMove, ghost1.freq);
+            };
+        </script>
+        
+        
+    </body>
+</html>
