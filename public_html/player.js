@@ -1,6 +1,7 @@
 function PlayerCharacter(name, /*hp,*/ speed, x, y){
     this.name = name;
     this.isAlive = true;
+    this.score = 0;
     //this.health = hp;
     this.speed = speed;
     this.x = x;
@@ -22,23 +23,33 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y){
         p.style.marginTop = this.y + "px";
         p.style.marginLeft = this.x + "px";
     };
-    this.move = function(dir){
+    this.move = function(dir, arr){
         var T = parseInt(document.getElementById('player').style.marginTop);
         var L = parseInt(document.getElementById('player').style.marginLeft);
         if(this.isAlive){
-            if(dir === 37 && T%50 === 0 && T > 50){
+            if(dir === 37 && T%50 === 0 && L > 50){
                 //left
                 this.x -= this.speed;
-            } else if(dir === 38 && L%50 === 0){
+            } else if(dir === 38 && L%50 === 0 && T > 50){
                 //up
                 this.y -= this.speed;
-            } else if(dir === 39 && T%50 === 0){
+            } else if(dir === 39 && T%50 === 0 && L < 500){
                 //right
                 this.x += this.speed;
-            } else if(dir === 40 && L%50 === 0){
+            } else if(dir === 40 && L%50 === 0 && T < 500){
                 //down
                 this.y += this.speed;
             }
-        }        
+            this.checkCoin(arr);
+        };
+    };
+    this.checkCoin = function(point_arr){
+        for(i=0; i<point_arr.length; i++){
+            if(this.x === point_arr[i].x*50 && this.y === point_arr[i].y*50){
+                point_arr[i].kill();
+                this.score += point_arr[i].value;
+                point_arr.splice(i, 1);
+            }
+        }
     };
 }

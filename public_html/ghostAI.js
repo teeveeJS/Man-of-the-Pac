@@ -15,7 +15,6 @@ function ghost(name, x, y, speed, freq){
             p.style.height = "50px";
             p.style.width = "50px";
             p.style.zIndex = "999";
-            //p.style.borderRadius = "100%";
             document.body.appendChild(p);
         }
         p.style.marginTop = this.y + "px";

@@ -22,17 +22,21 @@
         <script src="createField.js"></script>
         <script src="player.js"></script>
         <script src="ghostAI.js"></script>
-        <script src="overlap.js"></script>
+        <script src="score.js"></script>
         <script>
             var player;
             var ghost1;
-            var t;          
+            var size = 10;
+            var t;
+            var t2;
+            var coins = [];
+            var coin_values = [1, 2, 3, 5, 10];
             
             document.addEventListener("keydown", windowKeyPress, false);
             function windowKeyPress(e){
                 var k = e.keyCode;
                 if(k === 37 || k === 38 || k === 39 || k === 40){
-                    player.move(k);
+                    player.move(k, coins);
                 } else {
                     //probably do nothing
                 }
@@ -46,12 +50,22 @@
                 }
                 if(player.x-ghost1.x < 50 && ghost1.x-player.x < 50 && player.y-ghost1.y < 50 && ghost1.y-player.y < 50){
                     clearInterval(t);
+                    clearInterval(t2);
                     player.isAlive = false;
                     document.getElementById("game_text").innerHTML = "Game Over!";
+                    alert("player score: " + player.score);
                 }
             }
             
-            window.onload = createField();
+            function randomPoint(){
+                var r = Math.floor(Math.random()*3);
+                if(r === 1){
+                    var val = coin_values[Math.floor(Math.random()*coin_values.length)];
+                    coins[coins.length] = new coin(val).place();
+                }
+            }
+            
+            window.onload = createField(size);
             window.onload = function(){
                 player = new PlayerCharacter("default", 10, 50, 50);
                 player.loadCharacter();
@@ -59,6 +73,7 @@
                 ghost1.loadGhost();
                 ghost1.move(player.x, player.y);
                 t = setInterval(randomMove, ghost1.freq);
+                t2 = setInterval(randomPoint, 1000);
             };
         </script>
         
