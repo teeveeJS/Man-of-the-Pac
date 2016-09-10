@@ -23,21 +23,21 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y){
         p.style.marginLeft = this.x + "px";
     };
     this.move = function(dir){
+        var T = parseInt(document.getElementById('player').style.marginTop);
+        var L = parseInt(document.getElementById('player').style.marginLeft);
         if(this.isAlive){
-            if(dir === 37){
-            //left
+            if(dir === 37 && T%50 === 0 && T > 50){
+                //left
                 this.x -= this.speed;
-            } else if(dir === 38){
+            } else if(dir === 38 && L%50 === 0){
                 //up
                 this.y -= this.speed;
-            } else if(dir === 39){
+            } else if(dir === 39 && T%50 === 0){
                 //right
                 this.x += this.speed;
-            } else if(dir === 40){
+            } else if(dir === 40 && L%50 === 0){
                 //down
                 this.y += this.speed;
-            } else {
-                //probably do nothing
             }
         }        
     };
