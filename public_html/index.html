@@ -8,6 +8,16 @@
             *{
                 position: absolute;
             }
+            #game_text{
+                margin-top: 0px;
+                margin-left: 150px;
+                font-size: 30px;
+                color: red;
+                background-color: aquamarine;
+                height: 40px;
+                width: 300px;
+                padding-left: 20px;
+            }
         </style>
         <script src="createField.js"></script>
         <script src="player.js"></script>
@@ -21,22 +31,9 @@
             document.addEventListener("keydown", windowKeyPress, false);
             function windowKeyPress(e){
                 var k = e.keyCode;
-                if(k === 37){
-                    //left
-                    player.x -= player.speed;
-                } else if(k === 38){
-                    //up
-                    player.y -= player.speed;
-                } else if(k === 39){
-                    //right
-                    player.x += player.speed;
-                } else if(k === 40){
-                    //down
-                    player.y += player.speed;
-                } else {
-                    //probably do nothing
+                if(k === 37 || k === 38 || k === 39 || k === 40){
+                    player.move(k);
                 }
-                //console.log(player.x + " " + player.y);
                 player.loadCharacter();
             }
             
@@ -47,7 +44,8 @@
                 }
                 if(player.x-ghost1.x < 50 && ghost1.x-player.x < 50 && player.y-ghost1.y < 50 && ghost1.y-player.y < 50){
                     clearInterval(t);
-                    console.log("end");
+                    player.isAlive = false;
+                    document.getElementById("game_text").innerHTML = "Game Over!";
                 }
             }
             
@@ -62,6 +60,6 @@
             };
         </script>
         
-        
+        <div id="game_text"></div>
     </body>
 </html>

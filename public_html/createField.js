@@ -12,8 +12,8 @@ function createField() {
             temp.style.height = "50px";
             //temp.style.position = "absolute";
             temp.style.zIndex = "1";
-            temp.style.marginTop = String(50 * h) + "px";
-            temp.style.marginLeft = String(50 * i) + "px";
+            temp.style.marginTop = String(50*h) + "px";
+            temp.style.marginLeft = String(50*i) + "px";
             if(i%2 === 0 && h%2 !== 0 || i%2 !== 0 && h%2 === 0){
                 temp.style.backgroundColor = "#1357B0";
             } else {

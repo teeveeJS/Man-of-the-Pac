@@ -1,5 +1,6 @@
 function PlayerCharacter(name, /*hp,*/ speed, x, y){
     this.name = name;
+    this.isAlive = true;
     //this.health = hp;
     this.speed = speed;
     this.x = x;
@@ -21,5 +22,23 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y){
         p.style.marginTop = this.y + "px";
         p.style.marginLeft = this.x + "px";
     };
+    this.move = function(dir){
+        if(this.isAlive){
+            if(dir === 37){
+            //left
+                this.x -= this.speed;
+            } else if(dir === 38){
+                //up
+                this.y -= this.speed;
+            } else if(dir === 39){
+                //right
+                this.x += this.speed;
+            } else if(dir === 40){
+                //down
+                this.y += this.speed;
+            } else {
+                //probably do nothing
+            }
+        }        
+    };
 }
-
