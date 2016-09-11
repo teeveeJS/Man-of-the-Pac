@@ -46,10 +46,18 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y){
     this.checkCoin = function(point_arr){
         for(i=0; i<point_arr.length; i++){
             if(this.x === point_arr[i].x*50 && this.y === point_arr[i].y*50){
-                point_arr[i].kill();
                 this.score += point_arr[i].value;
+                document.getElementById("score").innerHTML = this.score;
+                point_arr[i].kill();
                 point_arr.splice(i, 1);
             }
         }
+    };
+    this.kill = function(){
+        this.isAlive = false;
+        clearInterval(t);
+        clearInterval(t2);
+        document.getElementById("game_text").style.visibility = "visible";
+        document.getElementById("game_text").innerHTML = "Game Over!";
     };
 }

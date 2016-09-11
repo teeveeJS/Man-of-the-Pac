@@ -22,5 +22,9 @@ function coin(value){
     };
     this.kill = function(){
         document.getElementById(this.id+"coin").remove();
+        delete this.x;
+        delete this.y;
+        delete this.id;
+        delete this.value;
     };
 }
