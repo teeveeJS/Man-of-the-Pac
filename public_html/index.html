@@ -8,35 +8,52 @@
             *{
                 position: absolute;
             }
+            .top{
+                background-color: aquamarine;
+                margin-top: 0px;
+                height: 40px;
+                font-size: 30px;
+                color: red;
+                text-align: center;
+            }
+            #score{
+                margin-left: 50px;
+                width: 100px;
+            }
+            #time{
+                margin-left: 200px;
+                width: 100px;
+            }
+            #game_text{
+                margin-left: 350px;
+                width: 200px;
+                visibility: hidden;
+            }
         </style>
         <script src="createField.js"></script>
         <script src="player.js"></script>
         <script src="ghostAI.js"></script>
-        <script src="overlap.js"></script>
+        <script src="score.js"></script>
+        <script src="timer.js"></script>
         <script>
             var player;
             var ghost1;
-            var t;          
+            var size = 10;
+            var x;
+            var t;
+            var t2;
+            var coins = [];
+            var coin_values = [1, 2, 3, 5, 10];
+            var clock = new timer(100);
             
             document.addEventListener("keydown", windowKeyPress, false);
             function windowKeyPress(e){
                 var k = e.keyCode;
-                if(k === 37){
-                    //left
-                    player.x -= player.speed;
-                } else if(k === 38){
-                    //up
-                    player.y -= player.speed;
-                } else if(k === 39){
-                    //right
-                    player.x += player.speed;
-                } else if(k === 40){
-                    //down
-                    player.y += player.speed;
+                if(k === 37 || k === 38 || k === 39 || k === 40){
+                    player.move(k, coins);
                 } else {
                     //probably do nothing
                 }
-                //console.log(player.x + " " + player.y);
                 player.loadCharacter();
             }
             
@@ -46,22 +63,32 @@
                     ghost1.move(player.x, player.y);
                 }
                 if(player.x-ghost1.x < 50 && ghost1.x-player.x < 50 && player.y-ghost1.y < 50 && ghost1.y-player.y < 50){
-                    clearInterval(t);
-                    console.log("end");
+                    clock.stop();
+                    player.kill();
                 }
             }
             
-            window.onload = createField();
+            function randomPoint(){
+                var r = Math.floor(Math.random()*3);
+                if(r === 1){
+                    var val = coin_values[Math.floor(Math.random()*coin_values.length)];
+                    coins[coins.length] = new coin(val).place();
+                }
+            }
+            
             window.onload = function(){
+                createField(size);
                 player = new PlayerCharacter("default", 10, 50, 50);
                 player.loadCharacter();
                 ghost1 = new ghost("ghost1", 500, 500, 5, 100);
                 ghost1.loadGhost();
-                ghost1.move(player.x, player.y);
+                x = setInterval(this.getDisplayTime, this.freq);
                 t = setInterval(randomMove, ghost1.freq);
+                t2 = setInterval(randomPoint, 1000);
             };
         </script>
-        
-        
+        <div id="score" class="top"></div>
+        <div id="time" class="top"></div>
+        <div id="game_text" class="top"></div>
     </body>
 </html>

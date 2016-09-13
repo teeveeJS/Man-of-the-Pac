@@ -1,19 +1,15 @@
-var size = 10;
-
-function createField() {
+function createField(size) {
     for (h = 1; h <= size; h++) {
         for (i = 1; i <= size; i++) {
             var temp = document.createElement("DIV");
             document.body.appendChild(temp);
-            var divID = String(size-h) + String(i);
+            var divID = String(h) + String(i);
             temp.setAttribute("id", divID);
             document.getElementById(divID).addEventListener("click", clickAction);
             temp.style.width = "50px";
             temp.style.height = "50px";
-            //temp.style.position = "absolute";
-            temp.style.zIndex = "1";
-            temp.style.marginTop = String(50 * h) + "px";
-            temp.style.marginLeft = String(50 * i) + "px";
+            temp.style.marginTop = String(50*h) + "px";
+            temp.style.marginLeft = String(50*i) + "px";
             if(i%2 === 0 && h%2 !== 0 || i%2 !== 0 && h%2 === 0){
                 temp.style.backgroundColor = "#1357B0";
             } else {
