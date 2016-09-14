@@ -20,11 +20,15 @@ function ghost(name, x, y, speed, freq){
         p.style.marginTop = this.y + "px";
         p.style.marginLeft = this.x + "px";
     };
-    this.move = function(px, py){
-        var sX = Math.sign(px - this.x);
-        var sY = Math.sign(py - this.y);
-        this.x = this.x + sX*this.speed;
-        this.y = this.y + sY*this.speed;
-        this.loadGhost();       
+    this.move = function(ghost, player){
+        var sX = Math.sign(player.x - ghost.x);
+        var sY = Math.sign(player.y - ghost.y);
+        ghost.x = ghost.x + sX*ghost.speed;
+        ghost.y = ghost.y + sY*ghost.speed;
+        ghost.loadGhost();
+        if(Math.abs(player.x-ghost.x) < 50 && Math.abs(player.y-ghost.y) < 50){
+            clock.stop();
+            player.kill();
+        }
     };
 }

@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>MacPan</title>
+        <link rel="shortcut icon" href="small_ghost_icon.ico">
         <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
@@ -10,6 +11,8 @@
         <script src="ghostAI.js"></script>
         <script src="score.js"></script>
         <script src="timer.js"></script>
+        <script src="ghostGen.js"></script>
+        
         <script>
             var player;
             var ghosts = [];
@@ -27,40 +30,26 @@
             ghosts[0] = new ghost("ghost1", 500, 500, 5, 100);
             
             clock = new timer(100);
-                        
-            function randomMove(){
-                var x = Math.floor(Math.random()*5);
-                if(x !== 1){
-                    ghost1.move(player.x, player.y);
-                }
-                if(Math.abs(player.x-ghost1.x) < 50 && Math.abs(player.y-ghost1.y) < 50){
-                    clock.stop();
-                    player.kill();
-                }
-            }
+
             
             function randomPoint(){
-                var r = Math.floor(Math.random()*3);
+                var r = Math.floor(Math.random()*4);
                 if(r === 1){
                     var rand = Math.floor(Math.random()*100);
-                    var val;
-                    switch(rand){
-                        case rand >= 90:
-                            val = 10;
-                            break;
-                        case rand >= 60 && rand < 90:
-                            val = 5;
-                            break;
-                        case rand >= 30 && rand < 60:
-                            val = 3;
-                            break;
-                        case rand < 30:
-                            val = 1;
-                            break;
-                        default: return "error";
-                    }
-                    coins[coins.length] = new coin(val).place();
+                var val;
+                if(rand >= 90){
+                    val = 10;
+                } else if(rand < 90 && rand >= 70){
+                    val = 5;
+                } else if(rand < 70 && rand >= 40){
+                    val = 3;
+                } else if(rand < 40 && rand >= 20){
+                    val = 2;
+                } else {
+                    val = 1;
                 }
+                coins[coins.length] = new coin(val).place();
+                }                
             }
             
             document.addEventListener("keydown", windowKeyPress, false);
@@ -77,10 +66,9 @@
             window.onload = function(){
                 createField(size);
                 player.loadCharacter();
-                ghost1.loadGhost();
-                x = setInterval(this.getDisplayTime, this.freq);
-                t = setInterval(randomMove, ghost1.freq);
-                t2 = setInterval(randomPoint, 1000);
+                ghosts[0].loadGhost();
+                t = setInterval(ghosts[0].move, ghosts[0].freq, ghosts[0], player);
+                t2 = setInterval(randomPoint, 750);
                 clock.start();
                 clock.getDisplayTime();
             };
