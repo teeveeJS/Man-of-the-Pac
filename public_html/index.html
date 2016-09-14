@@ -12,6 +12,7 @@
         <script src="score.js"></script>
         <script src="timer.js"></script>
         <script src="ghostGen.js"></script>
+        <script src="ghost.js"></script>
         
         <script>
             var player;
@@ -24,6 +25,8 @@
             var clock;
             var start_time;
             var t3;
+            
+            var tg;
             
             
             player = new PlayerCharacter("default", 10, 50, 50);
@@ -71,6 +74,10 @@
                 t2 = setInterval(randomPoint, 750);
                 clock.start();
                 clock.getDisplayTime();
+                
+                var g = new ghostc("qwer", 260, 260, 5, 25);
+                g.loadGhost();
+                tg = setInterval(g.move, g.freq, g);
             };
         </script>
         <div id="score" class="top"></div>
