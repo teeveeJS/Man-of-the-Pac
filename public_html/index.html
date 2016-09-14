@@ -18,7 +18,6 @@
             var t;
             var t2;
             var coins = [];
-            var coin_values = [1, 2, 3, 5, 10];
             var clock;
             var start_time;
             var t3;
@@ -48,7 +47,23 @@
             function randomPoint(){
                 var r = Math.floor(Math.random()*3);
                 if(r === 1){
-                    var val = coin_values[Math.floor(Math.random()*coin_values.length)];
+                    var rand = Math.floor(Math.random()*100);
+                    var val;
+                    switch(rand){
+                        case rand >= 90:
+                            val = 10;
+                            break;
+                        case rand >= 60 && rand < 90:
+                            val = 5;
+                            break;
+                        case rand >= 30 && rand < 60:
+                            val = 3;
+                            break;
+                        case rand < 30:
+                            val = 1;
+                            break;
+                        default: return "error";
+                    }
                     coins[coins.length] = new coin(val).place();
                 }
             }
