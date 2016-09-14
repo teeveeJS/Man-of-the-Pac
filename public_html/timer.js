@@ -4,20 +4,19 @@ function timer(f){
     this.freq = f;
     this.start = function(){
         this.t1 = new Date().getTime();
+        console.log("start time:" + this.t1);
     };
     this.getDisplayTime = function(){
-        //IMPORTANT: setInterval must be done in the main file!
-        if(this.t1 === null){
-            this.start();
-        }
         var temp = new Date().getTime();
-        //add other formatting to the display time
-        var time = parseInt(temp - this.t1)/1000;
-        //change the id to whatever depending on the output
-        document.getElementById("time").innerHTML = time;
+        var time = (temp-clock.t1)/1000;
+        document.getElementById('time').innerHTML = time.toFixed(1);
+        t3 = setTimeout(clock.getDisplayTime, 10);
     };
     this.stop = function(){
-        clearInterval(x);
+        clearTimeout(t3);
+        /*
         this.t2 = new Date().getTime();
+        var t = this.t2 - this.t1;
+        console.log("final time: " + t);*/
     };
 }

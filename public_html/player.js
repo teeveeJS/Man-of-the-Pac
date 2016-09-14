@@ -27,16 +27,17 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y){
         var T = parseInt(document.getElementById('player').style.marginTop);
         var L = parseInt(document.getElementById('player').style.marginLeft);
         if(this.isAlive){
-            if(dir === 37 && T%50 === 0 && L > 50){
+                            //uncomment to move only inside squares
+            if(dir === 37 /*&& T%50 === 0*/ && L > 50){
                 //left
                 this.x -= this.speed;
-            } else if(dir === 38 && L%50 === 0 && T > 50){
+            } else if(dir === 38 && /*L%50 === 0 &&*/ T > 50){
                 //up
                 this.y -= this.speed;
-            } else if(dir === 39 && T%50 === 0 && L < 500){
+            } else if(dir === 39 && /*T%50 === 0 &&*/ L < 500){
                 //right
                 this.x += this.speed;
-            } else if(dir === 40 && L%50 === 0 && T < 500){
+            } else if(dir === 40 && /*L%50 === 0 &&*/ T < 500){
                 //down
                 this.y += this.speed;
             }
@@ -45,7 +46,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y){
     };
     this.checkCoin = function(point_arr){
         for(i=0; i<point_arr.length; i++){
-            if(this.x === point_arr[i].x*50 && this.y === point_arr[i].y*50){
+            if(Math.abs(this.x - point_arr[i].x*50) < 15 && Math.abs(this.y - point_arr[i].y*50) < 15){
                 this.score += point_arr[i].value;
                 document.getElementById("score").innerHTML = this.score;
                 point_arr[i].kill();

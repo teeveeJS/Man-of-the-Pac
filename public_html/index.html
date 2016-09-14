@@ -19,7 +19,9 @@
             var t2;
             var coins = [];
             var coin_values = [1, 2, 3, 5, 10];
-            var clock = new timer(100);
+            var clock;
+            var start_time;
+            var t3;
             
             document.addEventListener("keydown", windowKeyPress, false);
             function windowKeyPress(e){
@@ -60,6 +62,9 @@
                 x = setInterval(this.getDisplayTime, this.freq);
                 t = setInterval(randomMove, ghost1.freq);
                 t2 = setInterval(randomPoint, 1000);
+                clock = new timer(100);
+                clock.start();
+                clock.getDisplayTime();
             };
         </script>
         <div id="score" class="top"></div>

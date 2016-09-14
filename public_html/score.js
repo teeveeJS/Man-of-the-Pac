@@ -21,7 +21,7 @@ function coin(value){
         return this;
     };
     this.kill = function(){
-        document.getElementById(this.id+"coin").remove();
+        document.getElementById(this.id).removeChild(document.getElementById(this.id+"coin"));
         delete this.x;
         delete this.y;
         delete this.id;
