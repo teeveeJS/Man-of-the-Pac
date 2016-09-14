@@ -1,0 +1,24 @@
+*{
+    position: absolute;
+}
+.top{
+    background-color: aquamarine;
+    margin-top: 0px;
+    height: 40px;
+    font-size: 30px;
+    color: red;
+    text-align: center;
+}
+#score{
+    margin-left: 50px;
+    width: 100px;
+}
+#time{
+    margin-left: 200px;
+    width: 100px;
+}
+#game_text{
+    margin-left: 350px;
+    width: 200px;
+    visibility: hidden;
+}
