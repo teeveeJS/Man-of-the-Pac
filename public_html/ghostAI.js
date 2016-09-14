@@ -28,4 +28,3 @@ function ghost(name, x, y, speed, freq){
         this.loadGhost();       
     };
 }
-

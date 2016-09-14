@@ -12,7 +12,7 @@
         <script src="timer.js"></script>
         <script>
             var player;
-            var ghost1;
+            var ghosts = [];
             var size = 10;
             var x;
             var t;
@@ -23,23 +23,18 @@
             var start_time;
             var t3;
             
-            document.addEventListener("keydown", windowKeyPress, false);
-            function windowKeyPress(e){
-                var k = e.keyCode;
-                if(k === 37 || k === 38 || k === 39 || k === 40){
-                    player.move(k, coins);
-                } else {
-                    //probably do nothing
-                }
-                player.loadCharacter();
-            }
             
+            player = new PlayerCharacter("default", 10, 50, 50);
+            ghosts[0] = new ghost("ghost1", 500, 500, 5, 100);
+            
+            clock = new timer(100);
+                        
             function randomMove(){
                 var x = Math.floor(Math.random()*5);
                 if(x !== 1){
                     ghost1.move(player.x, player.y);
                 }
-                if(player.x-ghost1.x < 50 && ghost1.x-player.x < 50 && player.y-ghost1.y < 50 && ghost1.y-player.y < 50){
+                if(Math.abs(player.x-ghost1.x) < 50 && Math.abs(player.y-ghost1.y) < 50){
                     clock.stop();
                     player.kill();
                 }
@@ -53,16 +48,24 @@
                 }
             }
             
+            document.addEventListener("keydown", windowKeyPress, false);
+            function windowKeyPress(e){
+                var k = e.keyCode;
+                if(k === 37 || k === 38 || k === 39 || k === 40){
+                    player.move(k, coins);
+                } else {
+                    //probably do nothing
+                }
+                player.loadCharacter();
+            }
+            
             window.onload = function(){
                 createField(size);
-                player = new PlayerCharacter("default", 10, 50, 50);
                 player.loadCharacter();
-                ghost1 = new ghost("ghost1", 500, 500, 5, 100);
                 ghost1.loadGhost();
                 x = setInterval(this.getDisplayTime, this.freq);
                 t = setInterval(randomMove, ghost1.freq);
                 t2 = setInterval(randomPoint, 1000);
-                clock = new timer(100);
                 clock.start();
                 clock.getDisplayTime();
             };

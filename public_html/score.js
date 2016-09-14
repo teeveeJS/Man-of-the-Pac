@@ -22,6 +22,7 @@ function coin(value){
     };
     this.kill = function(){
         document.getElementById(this.id).removeChild(document.getElementById(this.id+"coin"));
+        //causes a type error?
         delete this.x;
         delete this.y;
         delete this.id;
