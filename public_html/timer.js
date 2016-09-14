@@ -10,7 +10,7 @@ function timer(f){
         var temp = new Date().getTime();
         var time = (temp-clock.t1)/1000;
         document.getElementById('time').innerHTML = time.toFixed(1);
-        t3 = setTimeout(clock.getDisplayTime, 10);
+        t3 = setTimeout(clock.getDisplayTime, 50);
     };
     this.stop = function(){
         clearTimeout(t3);
