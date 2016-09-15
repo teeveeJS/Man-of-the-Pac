@@ -1,22 +1,20 @@
 function timer(f){
     this.t1;
-    this.t2;
+    this.time;
     this.freq = f;
     this.start = function(){
         this.t1 = new Date().getTime();
-        console.log("start time:" + this.t1);
+        return this;
     };
-    this.getDisplayTime = function(){
+    this.getDisplayTime = function(obj){
         var temp = new Date().getTime();
-        var time = (temp-clock.t1)/1000;
+        var time = (temp-obj.t1)/1000;
         document.getElementById('time').innerHTML = time.toFixed(1);
-        t3 = setTimeout(clock.getDisplayTime, 50);
+        //t3 = setTimeout(obj.getDisplayTime, 50, obj);
+        obj.time = time;
+        return time;
     };
     this.stop = function(){
-        clearTimeout(t3);
-        /*
-        this.t2 = new Date().getTime();
-        var t = this.t2 - this.t1;
-        console.log("final time: " + t);*/
+        //clearTimeout(t3);
     };
 }

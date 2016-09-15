@@ -56,9 +56,9 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y){
     };
     this.kill = function(){
         this.isAlive = false;
-        clearInterval(t);
-        clearInterval(t2);
-        clearInterval(tg);
+        //clearInterval(t);
+        //clearInterval(t2);
+        clearInterval(zz);
         document.getElementById("game_text").style.visibility = "visible";
         document.getElementById("game_text").innerHTML = "Game Over!";
     };
