@@ -80,10 +80,10 @@
                 for(i=0; i<ghosts.length; i++){
                     ghosts[i].move(ghosts[i], player);
                 }
-                if(count % 15 === 0){
+                if(count % 10 === 0){
                     randomPoint();
                 }
-                if(count % 200 === 0){
+                if(count % 800 === 0){
                     ghostGen(player, ghosts);
                 }
             }
@@ -104,7 +104,7 @@
              * BUGS
              * when the first additional ghost is loaded, the first one becomes invisible/disappears: FIXED
              * ghost movement speed too unbalanced
-             * 
+             * Timer and randomPoint() run even when the window isn't active. Ghost stops
              * 
              * 
              * 
