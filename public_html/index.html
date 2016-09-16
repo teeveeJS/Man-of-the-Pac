@@ -34,15 +34,15 @@
             function randomPoint(){
                 var r = Math.floor(Math.random()*4);
                 if(r === 1){
-                    var rand = Math.floor(Math.random()*100);
+                    var rand = Math.floor(Math.random());
                 var val;
-                if(rand >= 90){
+                if(rand >= 0.90){
                     val = 10;
-                } else if(rand < 90 && rand >= 70){
+                } else if(rand < 0.90 && rand >= 0.70){
                     val = 5;
-                } else if(rand < 70 && rand >= 40){
+                } else if(rand < 0.70 && rand >= 0.40){
                     val = 3;
-                } else if(rand < 40 && rand >= 20){
+                } else if(rand < 0.40 && rand >= 0.20){
                     val = 2;
                 } else {
                     val = 1;
@@ -93,11 +93,12 @@
             
             
             /*TODO
-             * Obstacles
+             * Obstacles HOW would the maze be generated?
              * Finish moving all updating to update()
              * Implement ghost.frequency
              * Detect multiple key presses at once (to enable diagonal movement)
-             * 
+             * OR Only one click required for continuous movement. Direction will change on another keypress. player.move would be in update()
+             * Expiration time for coins OR another PacMan that eats the coins & can kill the player
              * 
              * 
              * 
