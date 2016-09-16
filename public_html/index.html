@@ -26,6 +26,7 @@
             var pm;
             var isKeyDown = false;
             var keyDown;
+            var speed = 50;
             
             
             player = new PlayerCharacter("default", 10, 50, 50, 100);
@@ -65,7 +66,7 @@
                 } else {
                     //probably do nothing
                 }
-                player.loadCharacter();
+                
             }
             function stopMoving(e){
                 isKeyDown = false;
@@ -76,7 +77,7 @@
                 player.loadCharacter();
                 ghosts[0].loadGhost();
                 clock.start();
-                zz = setInterval(update, 50);
+                zz = setInterval(update, speed);
             };
             
             
@@ -97,6 +98,7 @@
                 }
                 if(isKeyDown){
                     player.move(keyDown, coins);
+                    player.loadCharacter();
                 }
             }
             
@@ -111,14 +113,14 @@
              * Detect multiple key presses at once (to enable diagonal movement)
              * OR Only one click required for continuous movement. Direction will change on another keypress. player.move would be in update()
              * Expiration time for coins OR another PacMan that eats the coins & can kill the player
-             * 
+             * Speed boost coins? Invincibility coins?
              * 
              * 
              * BUGS
              * when the first additional ghost is loaded, the first one becomes invisible/disappears: FIXED
-             * ghost movement speed too unbalanced
+             * ghost movement speed too unbalanced: FIXED (kinda)
              * Timer and randomPoint() run even when the window isn't active. Ghost stops
-             * 
+             * Lag in player movement: FIXED
              * 
              * 
              * 

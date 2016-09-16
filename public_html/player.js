@@ -47,7 +47,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
     };
     this.checkCoin = function(point_arr){
         for(i=0; i<point_arr.length; i++){
-            if(Math.abs(this.x - point_arr[i].x*50) < 15 && Math.abs(this.y - point_arr[i].y*50) < 15){
+            if(Math.abs(this.x - point_arr[i].x*50) < 20 && Math.abs(this.y - point_arr[i].y*50) < 20){
                 this.score += point_arr[i].value;
                 document.getElementById("score").innerHTML = this.score;
                 point_arr[i].kill();
