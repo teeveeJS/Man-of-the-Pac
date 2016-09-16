@@ -12,6 +12,8 @@
         <script src="score.js"></script>
         <script src="timer.js"></script>
         <script src="ghostGen.js"></script>
+        <script src="startstopMoving.js"></script>
+        <script src="randomPoint.js"></script>
         
         <script>
             var player;
@@ -26,51 +28,16 @@
             var pm;
             var isKeyDown = false;
             var keyDown;
-            var speed = 50;
+            var speed = 50;//determines tick speed
             
             
             player = new PlayerCharacter("default", 10, 50, 50, 100);
             ghosts[0] = new ghost("ghost0", 500, 500, ghost_speed, 100);//frequency currently not implemented
             
             clock = new timer(100);
-
             
-            function randomPoint(){
-                var r = Math.floor(Math.random()*4);
-                if(r === 1){
-                    var rand = Math.random();
-                var val;
-                if(rand >= 0.90){
-                    val = 10;
-                } else if(rand < 0.90 && rand >= 0.70){
-                    val = 5;
-                } else if(rand < 0.70 && rand >= 0.40){
-                    val = 3;
-                } else if(rand < 0.40 && rand >= 0.20){
-                    val = 2;
-                } else {
-                    val = 1;
-                }
-                coins[coins.length] = new coin(val).place();
-                }                
-            }
-            
-            document.addEventListener("keydown", windowKeyPress, false);
+            document.addEventListener("keydown", startMoving, false);
             document.addEventListener("keyup", stopMoving, false);
-            function windowKeyPress(e){
-                var k = e.keyCode;
-                if(k === 37 || k === 38 || k === 39 || k === 40){
-                    //player.move(k, coins);
-                    isKeyDown = true;
-                    keyDown = k;
-                } else {
-                    //probably do nothing
-                }
-                
-            }
-            function stopMoving(e){
-                isKeyDown = false;
-            }
             
             window.onload = function(){
                 createField(size);
@@ -78,8 +45,7 @@
                 ghosts[0].loadGhost();
                 clock.start();
                 zz = setInterval(update, speed);
-            };
-            
+            };            
             
             function update(){
                 count++;
@@ -91,7 +57,7 @@
                     ghosts[i].move(ghosts[i], player);
                 }
                 if(count % 10 === 0){
-                    randomPoint();
+                    randomPoint(coins);
                 }
                 if(count % 800 === 0){
                     ghostGen(player, ghosts);
@@ -114,6 +80,10 @@
              * OR Only one click required for continuous movement. Direction will change on another keypress. player.move would be in update()
              * Expiration time for coins OR another PacMan that eats the coins & can kill the player
              * Speed boost coins? Invincibility coins?
+             * Ctrl and Shift effects?
+             * Difficulty
+             * Better playing character movement (currently choppy)
+             * If time > 60, convert to minutes
              * 
              * 
              * BUGS
