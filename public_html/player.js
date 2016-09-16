@@ -1,9 +1,10 @@
-function PlayerCharacter(name, /*hp,*/ speed, x, y){
+function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
     this.name = name;
     this.isAlive = true;
     this.score = 0;
     //this.health = hp;
     this.speed = speed;
+    this.freq = f;
     this.x = x;
     this.y = y;
     this.loadCharacter = function(){
@@ -56,10 +57,8 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y){
     };
     this.kill = function(){
         this.isAlive = false;
-        //clearInterval(t);
-        //clearInterval(t2);
         clearInterval(zz);
         document.getElementById("game_text").style.visibility = "visible";
         document.getElementById("game_text").innerHTML = "Game Over!";
     };
-}
+};

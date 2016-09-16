@@ -23,9 +23,12 @@
             var count = 0;
             var zz;
             var ghost_speed = 2;
+            var pm;
+            var isKeyDown = false;
+            var keyDown;
             
             
-            player = new PlayerCharacter("default", 10, 50, 50);
+            player = new PlayerCharacter("default", 10, 50, 50, 100);
             ghosts[0] = new ghost("ghost0", 500, 500, ghost_speed, 100);//frequency currently not implemented
             
             clock = new timer(100);
@@ -34,7 +37,7 @@
             function randomPoint(){
                 var r = Math.floor(Math.random()*4);
                 if(r === 1){
-                    var rand = Math.floor(Math.random());
+                    var rand = Math.random();
                 var val;
                 if(rand >= 0.90){
                     val = 10;
@@ -52,14 +55,20 @@
             }
             
             document.addEventListener("keydown", windowKeyPress, false);
+            document.addEventListener("keyup", stopMoving, false);
             function windowKeyPress(e){
                 var k = e.keyCode;
                 if(k === 37 || k === 38 || k === 39 || k === 40){
-                    player.move(k, coins);
+                    //player.move(k, coins);
+                    isKeyDown = true;
+                    keyDown = k;
                 } else {
                     //probably do nothing
                 }
                 player.loadCharacter();
+            }
+            function stopMoving(e){
+                isKeyDown = false;
             }
             
             window.onload = function(){
@@ -85,6 +94,9 @@
                 }
                 if(count % 800 === 0){
                     ghostGen(player, ghosts);
+                }
+                if(isKeyDown){
+                    player.move(keyDown, coins);
                 }
             }
             
