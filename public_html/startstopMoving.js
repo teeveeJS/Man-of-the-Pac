@@ -17,9 +17,11 @@ function startMoving(e){
         //activate invincibility
         x_invin = true;
         invin_count--;
+        document.getElementById("player").style.opacity = "0.3";
         updatePowers();
         setTimeout(function(){
             x_invin = false;
+            document.getElementById("player").style.opacity = "1";
         }, 1500);
     }
 
