@@ -14,6 +14,7 @@
         <script src="ghostGen.js"></script>
         <script src="startstopMoving.js"></script>
         <script src="randomPoint.js"></script>
+        <script src="powers_totalScore.js"></script>
         
         <script>
             var player;
@@ -31,8 +32,10 @@
             var speed = 50;//determines tick speed
             var z_boost = false;
             var boost_count = 3;
+            var boost_used = 0;
             var x_invin = false;
             var invin_count = 3;
+            var invin_used = 0;
             
             
             player = new PlayerCharacter("default", 10, 50, 50, 100);
@@ -73,11 +76,6 @@
                 }
             }
             
-            function updatePowers(){
-                document.getElementById("powers").innerHTML = "Boosts: " + boost_count + "<br/>" + "Invins: " + invin_count;
-            }
-            
-            
             
             
             
@@ -106,10 +104,33 @@
              * 
              */
         </script>
-        <div id="score" class="top"></div>
+        <div id="score" class="top">0</div>
         <div id="time" class="top"></div>
         <div id="game_text" class="top"></div>
-        <div id="powers">
-        </div>
+        <div id="powers" class="side"></div>
+        <table class="side" border="1">
+            <thead>
+                <tr>
+                    <th>Category</th><th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Coins</td><td id="t_coin" style="text-align: right"></td>
+                </tr>
+                <tr>
+                    <td>Time</td><td id="t_time" style="text-align: right"></td>
+                </tr>
+                <tr>
+                    <td>Boosts</td><td id="t_boost" style="text-align: right"></td>
+                </tr>
+                <tr>
+                    <td>Invins</td><td id="t_invin" style="text-align: right"></td>
+                </tr>
+                <tr>
+                    <th>Total</th><th id="t_total"></th>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>

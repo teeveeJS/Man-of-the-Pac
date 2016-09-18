@@ -10,6 +10,7 @@ function startMoving(e){
         //activate speedboost
         z_boost = true;
         boost_count--;
+        boost_used++;
         updatePowers();
         player.activateBoost(player);       
         //or update player.speed and do setTimeout() for its expiration
@@ -17,6 +18,7 @@ function startMoving(e){
         //activate invincibility
         x_invin = true;
         invin_count--;
+        invin_used++;
         document.getElementById("player").style.opacity = "0.3";
         updatePowers();
         setTimeout(function(){

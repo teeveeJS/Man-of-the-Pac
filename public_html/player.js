@@ -17,6 +17,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
             p.style.height = "50px";
             p.style.width = "50px";
             p.style.zIndex = "999";
+            p.setAttribute("class", "chars");
         }
         p.style.marginTop = this.y + "px";
         p.style.marginLeft = this.x + "px";
@@ -73,6 +74,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
             clearInterval(zz);
             document.getElementById("game_text").style.visibility = "visible";
             document.getElementById("game_text").innerHTML = "Game Over!";
+            totalScore();
         };        
     };
 };

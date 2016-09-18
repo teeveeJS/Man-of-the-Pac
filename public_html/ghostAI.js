@@ -7,11 +7,12 @@ function ghost(name, x, y, speed, freq){
     this.loadGhost = function(){
         var p = document.getElementById(this.name);
         if(p === null){
-            var img_src = ["ghost_blue.gif", "ghost_green.gif", "ghost_red.gif", "ghostc.gif"];
+            var img_src = ["blueghost.gif", "purpleghost.gif", "redghost.gif", "ghostc.gif"];
             var s = img_src[Math.floor(Math.random()*4)];
             p = document.createElement("IMG");
             p.setAttribute("src", s);
             p.setAttribute("id", this.name);
+            p.setAttribute("class", "chars");
             p.style.height = "50px";
             p.style.width = "50px";
             p.style.zIndex = "999";
@@ -28,7 +29,6 @@ function ghost(name, x, y, speed, freq){
         ghost.y = ghost.y + sY*ghost.speed;
         ghost.loadGhost();
         if(Math.abs(player.x-ghost.x) < 50 && Math.abs(player.y-ghost.y) < 50){
-            clock.stop();
             player.kill();
         }
     };

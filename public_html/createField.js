@@ -15,6 +15,8 @@ function createField(size) {
             } else {
                 temp.style.backgroundColor = "#0FA33B";
             }
+            temp.style.position = "absolute";
+            temp.style.zIndex = "-1";
         };
     };
 };
