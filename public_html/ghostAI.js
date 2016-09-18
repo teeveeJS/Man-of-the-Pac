@@ -13,9 +13,6 @@ function ghost(name, x, y, speed, freq){
             p.setAttribute("src", s);
             p.setAttribute("id", this.name);
             p.setAttribute("class", "chars");
-            p.style.height = "50px";
-            p.style.width = "50px";
-            p.style.zIndex = "999";
             document.body.appendChild(p);
         }
         p.style.marginTop = this.y + "px";

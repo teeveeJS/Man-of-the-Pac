@@ -83,7 +83,7 @@
              * Obstacles HOW would the maze be generated?
              * Finish moving all updating to update(): DONE
              * Implement ghost.frequency
-             * Detect multiple key presses at once (to enable diagonal movement):DONE
+             * Detect multiple key presses at once (to enable diagonal movement)
              * OR Only one click required for continuous movement. Direction will change on another keypress. player.move would be in update(): DONE
              * Expiration time for coins OR another PacMan that eats the coins & can kill the player
              * Speed boost coins? Invincibility coins?: DONE
@@ -98,8 +98,8 @@
              * ghost movement speed too unbalanced: FIXED (kinda)
              * Timer and randomPoint() run even when the window isn't active. Ghost stops
              * Lag in player movement: FIXED
-             * Boost allows player to go slightly beyond the field
-             * 
+             * Boost allows player to go slightly beyond the field: FIXED
+             * Bad bounding box for coins: FIXED
              * 
              * 
              */
@@ -120,6 +120,9 @@
                 </tr>
                 <tr>
                     <td>Time</td><td id="t_time" style="text-align: right"></td>
+                </tr>
+                <tr>
+                    <td>PPS</td><td id="t_pps" style="text-align: right"></td>
                 </tr>
                 <tr>
                     <td>Boosts</td><td id="t_boost" style="text-align: right"></td>
