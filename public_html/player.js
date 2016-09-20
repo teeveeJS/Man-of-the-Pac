@@ -19,19 +19,22 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
         p.style.marginTop = this.y + "px";
         p.style.marginLeft = this.x + "px";
     };
-    this.move = function(dir, arr){
-        if(this.isAlive){
+    this.move = function(map, arr){
+        //if(this.isAlive){
                             //uncomment to move only inside squares
-            if(dir === 37 /*&& T%50 === 0*/ && this.x > 50){
+            if(map[37] /*&& T%50 === 0*/ && this.x > 50){
                 //left
                 this.x -= this.speed;
-            } else if(dir === 38 && /*L%50 === 0 &&*/ this.y > 50){
+            }
+            if(map[38] && /*L%50 === 0 &&*/ this.y > 50){
                 //up
                 this.y -= this.speed;
-            } else if(dir === 39 && /*T%50 === 0 &&*/ this.x < 500){
+            }
+            if(map[39] && /*T%50 === 0 &&*/ this.x < 500){
                 //right
                 this.x += this.speed;
-            } else if(dir === 40 && /*L%50 === 0 &&*/ this.y < 500){
+            }
+            if(map[40] && /*L%50 === 0 &&*/ this.y < 500){
                 //down
                 this.y += this.speed;
             }
@@ -46,7 +49,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
                 this.y = 50;
             }
             this.checkCoin(arr);
-        };
+        //};
     };
     this.checkCoin = function(point_arr){
         for(i=0; i<point_arr.length; i++){

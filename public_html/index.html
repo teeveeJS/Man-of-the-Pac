@@ -36,6 +36,7 @@
             var x_invin = false;
             var invin_count = 3;
             var invin_used = 0;
+            var map = {};
             
             
             player = new PlayerCharacter("default", 10, 50, 50, 100);
@@ -71,7 +72,7 @@
                     ghostGen(player, ghosts);
                 }
                 if(isKeyDown){
-                    player.move(keyDown, coins);
+                    player.move(map, coins);
                     player.loadCharacter();
                 }
             }

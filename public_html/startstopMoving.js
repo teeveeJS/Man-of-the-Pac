@@ -1,9 +1,9 @@
 function startMoving(e){
     var k = e.keyCode;
-    //z === 90
-    //x === 88
+    map[k] = e.type === "keydown";
+    //allows for multiple key presses
     if(player.isAlive){
-        if(k === 37 || k === 38 || k === 39 || k === 40){
+        if(map[37] || map[38] || map[39] || map[40]){
             //player.move(k, coins);
             isKeyDown = true;
             keyDown = k;
@@ -31,5 +31,7 @@ function startMoving(e){
 }
 
 function stopMoving(e){
+    var k = e.keyCode;
+    map[k] = e.type === "keydown";
     isKeyDown = false;
 }
