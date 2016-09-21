@@ -7,6 +7,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
     this.freq = f;
     this.x = x;
     this.y = y;
+    this.dist = 0;
     this.loadCharacter = function(){
         var p = document.getElementById("player");   
         if(p === null){
@@ -20,36 +21,56 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
         p.style.marginLeft = this.x + "px";
     };
     this.move = function(map, arr){
-        //if(this.isAlive){
-                            //uncomment to move only inside squares
-            if(map[37] /*&& T%50 === 0*/ && this.x > 50){
-                //left
-                this.x -= this.speed;
-            }
-            if(map[38] && /*L%50 === 0 &&*/ this.y > 50){
-                //up
-                this.y -= this.speed;
-            }
-            if(map[39] && /*T%50 === 0 &&*/ this.x < 500){
-                //right
-                this.x += this.speed;
-            }
-            if(map[40] && /*L%50 === 0 &&*/ this.y < 500){
-                //down
-                this.y += this.speed;
-            }
-            if(this.x > 500){
-                this.x = 500;
-            } else if(this.x < 50){
-                this.x = 50;
-            }
-            if(this.y > 500){
-                this.y = 500;
-            } else if(this.y < 50){
-                this.y = 50;
-            }
-            this.checkCoin(arr);
-        //};
+                        //uncomment to move only inside squares
+        if(map[37] /*&& T%50 === 0*/ && this.x > 50){
+            //left
+            this.x -= this.speed;
+            this.dist += this.speed;
+        }
+        if(map[38] && /*L%50 === 0 &&*/ this.y > 50){
+            //up
+            this.y -= this.speed;
+            this.dist += this.speed;
+        }
+        if(map[39] && /*T%50 === 0 &&*/ this.x < 500){
+            //right
+            this.x += this.speed;
+            this.dist += this.speed;
+        }
+        if(map[40] && /*L%50 === 0 &&*/ this.y < 500){
+            //down
+            this.y += this.speed;
+            this.dist += this.speed;
+        }
+        
+        if(map[90] && !z_boost && boost_count > 0){
+            //activate speedboost
+            z_boost = true;
+            boost_count--;
+            boost_used++;
+            updatePowers();
+            this.activateBoost(this);
+        }
+        if(map[88] && !x_invin && invin_count > 0){
+            //activate invincibility
+            x_invin = true;
+            invin_count--;
+            invin_used++;
+            updatePowers();
+            this.activateInvin();
+        }
+        if(this.x > 500){
+            this.x = 500;
+        } else if(this.x < 50){
+            this.x = 50;
+        }
+        if(this.y > 500){
+            this.y = 500;
+        } else if(this.y < 50){
+            this.y = 50;
+        }
+        this.checkCoin(arr);
+        this.loadCharacter();
     };
     this.checkCoin = function(point_arr){
         for(i=0; i<point_arr.length; i++){
@@ -75,6 +96,13 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
             p.speed -= 10;
             z_boost = false;
         }, 2000);
+    };
+    this.activateInvin = function(){
+        document.getElementById("player").style.opacity = "0.3";
+        setTimeout(function(){
+            x_invin = false;
+            document.getElementById("player").style.opacity = "1";
+        }, 1500);
     };
     this.kill = function(){
         if(!x_invin){

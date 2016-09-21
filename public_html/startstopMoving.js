@@ -3,6 +3,9 @@ function startMoving(e){
     map[k] = e.type === "keydown";
     //allows for multiple key presses
     if(player.isAlive){
+        isKeyDown = true;
+        /*
+         * moved to player
         if(map[37] || map[38] || map[39] || map[40]){
             //player.move(k, coins);
             isKeyDown = true;
@@ -26,12 +29,14 @@ function startMoving(e){
                 x_invin = false;
                 document.getElementById("player").style.opacity = "1";
             }, 1500);
-        }
+        }*/
     }
 }
 
 function stopMoving(e){
     var k = e.keyCode;
     map[k] = e.type === "keydown";
-    isKeyDown = false;
-}
+    if(map[90] || map[88]){
+        isKeyDown = false;
+    }
+};

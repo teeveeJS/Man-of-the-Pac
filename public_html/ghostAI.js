@@ -25,7 +25,7 @@ function ghost(name, x, y, speed, freq){
         ghost.x = ghost.x + sX*ghost.speed;
         ghost.y = ghost.y + sY*ghost.speed;
         ghost.loadGhost();
-        if(Math.abs(player.x-ghost.x) < 50 && Math.abs(player.y-ghost.y) < 50){
+        if(Math.abs(player.x-ghost.x) < 45 && Math.abs(player.y-ghost.y) < 45){
             player.kill();
         }
     };
