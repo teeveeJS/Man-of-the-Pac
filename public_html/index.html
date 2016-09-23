@@ -30,17 +30,17 @@
             var isKeyDown = false;
             var keyDown;
             var speed = 50;//determines tick speed
-            var z_boost = false;
-            var boost_count = 3;
-            var boost_used = 0;
-            var x_invin = false;
-            var invin_count = 3;
-            var invin_used = 0;
+            var z_boost;
+            var boost_count;
+            var boost_used;
+            var x_invin;
+            var invin_count;
+            var invin_used;
             var map = {};
             
-            
-            player = new PlayerCharacter("default", 10, 50, 50, 100);
-            ghosts[0] = new ghost("ghost0", 500, 500, ghost_speed, 100);//frequency currently not implemented
+            function get(id){
+                return document.getElementById(id);
+            }
             
             clock = new timer(100);
             
@@ -48,13 +48,34 @@
             document.addEventListener("keyup", stopMoving, false);
             
             window.onload = function(){
-                updatePowers();                
                 createField(size);
+            };
+            
+            function start_game(){
+                init_div();
+                
+                z_boost = false;
+                boost_count = 3;
+                boost_used = 0;
+                x_invin = false;
+                invin_count = 3;
+                invin_used = 0;            
+            
+                player = new PlayerCharacter("default", 10, 50, 50, 100);
+                ghosts[0] = new ghost("ghost0", 500, 500, ghost_speed, 100);//frequency currently not implemented
                 player.loadCharacter();
                 ghosts[0].loadGhost();
                 clock.start();
                 zz = setInterval(update, speed);
-            };            
+                updatePowers();
+            }
+            
+            function init_div(){
+                get("start").style.visibility = "hidden";
+                get("game_text").style.visibility = "hidden";
+                get("score").innerHTML = 0;
+                get("time").innerHTML = null;
+            }
             
             function update(){
                 count++;
@@ -76,6 +97,8 @@
                     player.loadCharacter();
                 }
             }
+            
+            
             
             
             
@@ -105,9 +128,10 @@
              * 
              */
         </script>
+        <button id="start" onclick="start_game()">Start</button>
         <div id="score" class="top">0</div>
         <div id="time" class="top"></div>
-        <div id="game_text" class="top"></div>
+        <div id="game_text" class="top">Game Over!</div>
         <div id="powers" class="side"></div>
         <table class="side" border="1">
             <thead>

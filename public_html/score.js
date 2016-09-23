@@ -16,14 +16,14 @@ function coin(value){
             e.innerHTML = this.value;
         }        
         e.style.textAlign = "center";        
-        if(!document.getElementById(this.id).hasChildNodes()){
-            document.getElementById(this.id).appendChild(e);
+        if(!get(this.id).hasChildNodes()){
+            get(this.id).appendChild(e);
         }
         return this;
     };
     this.kill = function(){
-        if(document.getElementById(this.id).hasChildNodes()){
-            document.getElementById(this.id).removeChild(document.getElementById(this.id+"coin"));
+        if(get(this.id).hasChildNodes()){
+            get(this.id).removeChild(get(this.id+"coin"));
         };
         delete this.x;
         delete this.y;

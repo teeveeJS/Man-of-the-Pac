@@ -5,7 +5,7 @@ function createField(size) {
             document.body.appendChild(temp);
             var divID = String(h) + String(i);
             temp.setAttribute("id", divID);
-            document.getElementById(divID).addEventListener("click", clickAction);
+            get(divID).addEventListener("click", clickAction);
             temp.style.width = "50px";
             temp.style.height = "50px";
             temp.style.marginTop = String(50*h) + "px";

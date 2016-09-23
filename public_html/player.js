@@ -84,7 +84,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
                 } else {
                     this.score += point_arr[i].value;
                 }
-                document.getElementById("score").innerHTML = this.score;
+                get("score").innerHTML = this.score;
                 point_arr[i].kill();
                 point_arr.splice(i, 1);
             }
@@ -98,18 +98,18 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
         }, 2000);
     };
     this.activateInvin = function(){
-        document.getElementById("player").style.opacity = "0.3";
+        get("player").style.opacity = "0.3";
         setTimeout(function(){
             x_invin = false;
-            document.getElementById("player").style.opacity = "1";
+            get("player").style.opacity = "1";
         }, 1500);
     };
     this.kill = function(){
         if(!x_invin){
             this.isAlive = false;
             clearInterval(zz);
-            document.getElementById("game_text").style.visibility = "visible";
-            document.getElementById("game_text").innerHTML = "Game Over!";
+            get("game_text").style.visibility = "visible";
+            get("start").style.visibility = "visible";
             totalScore();
         };        
     };
