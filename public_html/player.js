@@ -1,10 +1,9 @@
-function PlayerCharacter(name, /*hp,*/ speed, x, y, f, ctrl){
+function PlayerCharacter(name, /*hp,*/ speed, x, y, ctrl){
     this.name = name;
     this.isAlive = true;
     this.score = 0;
     //this.health = hp;
     this.speed = speed;
-    this.freq = f;
     this.controls = ctrl; //an array containing the keycodes
     this.x = x;
     this.y = y;
@@ -28,7 +27,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f, ctrl){
         p.style.marginTop = this.y + "px";
         p.style.marginLeft = this.x + "px";
     };
-    this.move = function(map, arr){
+    this.movePlayer = function(map, arr){
                         //uncomment to move only inside squares
         if(map[this.controls[0]] /*&& T%50 === 0*/ && this.x > 50){
             //left
@@ -93,7 +92,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f, ctrl){
                     this.score += point_arr[i].value;
                 }
                 get("score").innerHTML = this.score;
-                point_arr[i].kill();
+                point_arr[i].removeCoin();
                 point_arr.splice(i, 1);
             }
         }
@@ -118,6 +117,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f, ctrl){
             clearInterval(zz);
             get("game_text").style.visibility = "visible";
             get("start").style.visibility = "visible";
+            get("multip").style.visibility = "visible";
             totalScore();
         };        
     };

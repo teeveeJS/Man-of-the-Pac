@@ -19,7 +19,7 @@ function ghost(name, x, y, speed, freq){
         p.style.marginLeft = this.x + "px";
         return this;
     };
-    this.move = function(ghost, player){
+    this.moveGhost = function(ghost, player){
         var sX = Math.sign(player.x - ghost.x);
         var sY = Math.sign(player.y - ghost.y);
         ghost.x = ghost.x + sX*ghost.speed;

@@ -9,7 +9,7 @@
         <script src="createField.js"></script>
         <script src="player.js"></script>
         <script src="ghostAI.js"></script>
-        <script src="score.js"></script>
+        <script src="coins.js"></script>
         <script src="timer.js"></script>
         <script src="ghostGen.js"></script>
         <script src="startstopMoving.js"></script>
@@ -54,26 +54,34 @@
                     var current = distance(players[0], ghosts[i]);
                     var index = 0;
                     for(j=0;j<players.length;j++){
-                        if(distance(players[j], ghosts[i]) > current){
+                        if(distance(players[j], ghosts[i]) < current){
                             current = distance(players[j], ghosts[i]);
                             index = j;
                         }
                     }
-                    ghosts[i].move(ghosts[i], players[index]);
+                    ghosts[i].moveGhost(ghosts[i], players[index]);
                 }
                 if(count % 10 === 0){
                     randomPoint(coins);
                 }
+                /*
                 if(count % 600 === 0){
                     ghostGen(player, ghosts);
                     //needs fixing for multip
-                }
+                }*/
                 
+                if(players[0].isKeyDown){
+                    players[0].movePlayer(map, coins);
+                }
+                if(multip && players[1].isKeyDown){
+                    players[1].movePlayer(map, coins);
+                }
+                /*
                 for(i=0;i<players.length;i++){
                     if(players[i].isKeyDown){
-                        players[i].move(map, coins);
+                        players[i].movePlayer(map, coins);
                     }
-                }
+                }*/
             }
             
             
@@ -93,7 +101,8 @@
              * 
              * BUGS
              * Timer and randomPoint() run even when the window isn't active. Ghost stops
-             * 
+             * Prone to crashes
+             * Switching from multip to singlep doesn't remove the second pacman
              */
         </script>
         <button id="start" onclick="start_game()">Start</button>

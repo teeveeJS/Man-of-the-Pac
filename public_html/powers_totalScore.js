@@ -1,10 +1,21 @@
 function updatePowers(){
-    get("powers").innerHTML = "Boosts: " + players[0].boost_count + "<br/>" + "Invins: " + players[0].invin_count;
+    if(multip){
+        get("powers").innerHTML = "<span style='font-weight: bold'>" + players[0].name + "</span>"
+                + "<br/> Boosts: " + players[0].boost_count
+                + "<br/> Invins: " + players[0].invin_count
+                + "<br/><br/>" + "<span style='font-weight: bold'>" + players[1].name + "</span>"
+                + "<br/> Boosts: " + players[1].boost_count
+                + "<br/> Invins: " + players[1].invin_count;
+        
+    } else {
+        get("powers").innerHTML = "Boosts: " + players[0].boost_count + "<br/>" + "Invins: " + players[0].invin_count;
+    }
+    
 }
 
 function totalScore(){
     var total_score;
-    var coin_score = get("score").innerHTML;
+    var coin_score = players[0].score;
     var time = get("time").innerHTML;
     var pps = Math.round(parseInt(coin_score)*10/parseInt(time));
     if(time < 20){
