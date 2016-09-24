@@ -28,15 +28,20 @@ function init_div(){
     get("start").style.visibility = "hidden";
     get("multip").style.visibility = "hidden";
     get("game_text").style.visibility = "hidden";
+    get("player0").style.visibility = "hidden";
+    get("player1").style.visibility = "hidden";
     get("score").innerHTML = 0;
     get("time").innerHTML = null;
-    get("t_coin").innerHTML = null;
-    get("t_time").innerHTML = null;
-    get("t_pps").innerHTML = null;
-    get("t_boost").innerHTML = null;
-    get("t_invin").innerHTML = null;
-    get("t_dist").innerHTML = null;
-    get("t_total").innerHTML = null;
+    for(i=0;i<players.length;i++){
+        get("t_coin"+i).innerHTML = null;
+        get("t_time"+i).innerHTML = null;
+        get("t_pps"+i).innerHTML = null;
+        get("t_boost"+i).innerHTML = null;
+        get("t_invin"+i).innerHTML = null;
+        get("t_dist"+i).innerHTML = null;
+        get("t_total"+i).innerHTML = null;
+    }
+    
 }
 
 function remove_coins(){

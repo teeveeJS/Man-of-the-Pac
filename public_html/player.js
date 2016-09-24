@@ -118,6 +118,10 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, ctrl){
             get("game_text").style.visibility = "visible";
             get("start").style.visibility = "visible";
             get("multip").style.visibility = "visible";
+            get("player0").style.visibility = "visible";
+            if(multip){
+                get("player1").style.visibility = "visible";
+            }
             totalScore();
         };        
     };
