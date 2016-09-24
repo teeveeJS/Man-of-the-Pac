@@ -15,6 +15,7 @@
         <script src="startstopMoving.js"></script>
         <script src="randomPoint.js"></script>
         <script src="powers_totalScore.js"></script>
+        <script src="newgame.js"></script>
         
         <script>
             var player;
@@ -50,32 +51,6 @@
             window.onload = function(){
                 createField(size);
             };
-            
-            function start_game(){
-                init_div();
-                
-                z_boost = false;
-                boost_count = 3;
-                boost_used = 0;
-                x_invin = false;
-                invin_count = 3;
-                invin_used = 0;            
-            
-                player = new PlayerCharacter("default", 10, 50, 50, 100);
-                ghosts[0] = new ghost("ghost0", 500, 500, ghost_speed, 100);//frequency currently not implemented
-                player.loadCharacter();
-                ghosts[0].loadGhost();
-                clock.start();
-                zz = setInterval(update, speed);
-                updatePowers();
-            }
-            
-            function init_div(){
-                get("start").style.visibility = "hidden";
-                get("game_text").style.visibility = "hidden";
-                get("score").innerHTML = 0;
-                get("time").innerHTML = null;
-            }
             
             function update(){
                 count++;
