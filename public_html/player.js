@@ -1,20 +1,28 @@
-function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
+function PlayerCharacter(name, /*hp,*/ speed, x, y, f, ctrl){
     this.name = name;
     this.isAlive = true;
     this.score = 0;
     //this.health = hp;
     this.speed = speed;
     this.freq = f;
+    this.controls = ctrl; //an array containing the keycodes
     this.x = x;
     this.y = y;
     this.dist = 0;
+    this.z_boost = false;
+    this.boost_count = 3;
+    this.boost_used = 0;
+    this.x_invin = false;
+    this.invin_count = 3;
+    this.invin_used = 0;
+    this.isKeyDown = false;
     this.loadCharacter = function(){
-        var p = document.getElementById("player");   
+        var p = document.getElementById(this.name);
         if(p === null){
             p = document.createElement("IMG");
             p.setAttribute("src", "pacman.gif");
             document.body.appendChild(p);
-            p.setAttribute("id", "player");
+            p.setAttribute("id", this.name);
             p.setAttribute("class", "chars");
         }
         p.style.marginTop = this.y + "px";
@@ -22,42 +30,42 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
     };
     this.move = function(map, arr){
                         //uncomment to move only inside squares
-        if(map[37] /*&& T%50 === 0*/ && this.x > 50){
+        if(map[this.controls[0]] /*&& T%50 === 0*/ && this.x > 50){
             //left
             this.x -= this.speed;
             this.dist += this.speed;
         }
-        if(map[38] && /*L%50 === 0 &&*/ this.y > 50){
+        if(map[this.controls[1]] && /*L%50 === 0 &&*/ this.y > 50){
             //up
             this.y -= this.speed;
             this.dist += this.speed;
         }
-        if(map[39] && /*T%50 === 0 &&*/ this.x < 500){
+        if(map[this.controls[2]] && /*T%50 === 0 &&*/ this.x < 500){
             //right
             this.x += this.speed;
             this.dist += this.speed;
         }
-        if(map[40] && /*L%50 === 0 &&*/ this.y < 500){
+        if(map[this.controls[3]] && /*L%50 === 0 &&*/ this.y < 500){
             //down
             this.y += this.speed;
             this.dist += this.speed;
         }
         
-        if(map[90] && !z_boost && boost_count > 0){
+        if(map[this.controls[4]] && !this.z_boost && this.boost_count > 0){
             //activate speedboost
-            z_boost = true;
-            boost_count--;
-            boost_used++;
+            this.z_boost = true;
+            this.boost_count--;
+            this.boost_used++;
             updatePowers();
             this.activateBoost(this);
         }
-        if(map[88] && !x_invin && invin_count > 0){
+        if(map[this.controls[5]] && !this.x_invin && this.invin_count > 0){
             //activate invincibility
-            x_invin = true;
-            invin_count--;
-            invin_used++;
+            this.x_invin = true;
+            this.invin_count--;
+            this.invin_used++;
             updatePowers();
-            this.activateInvin();
+            this.activateInvin(this);
         }
         if(this.x > 500){
             this.x = 500;
@@ -76,10 +84,10 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
         for(i=0; i<point_arr.length; i++){
             if(Math.abs(this.x - point_arr[i].x*50) < 40 && Math.abs(this.y - point_arr[i].y*50) < 40){
                 if(point_arr[i].value === "i"){
-                    invin_count++;
+                    this.invin_count++;
                     updatePowers();
                 } else if(point_arr[i].value === "b"){
-                    boost_count++;
+                    this.boost_count++;
                     updatePowers();
                 } else {
                     this.score += point_arr[i].value;
@@ -94,18 +102,18 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, f){
         p.speed += 10;
         setTimeout(function(){
             p.speed -= 10;
-            z_boost = false;
+            p.z_boost = false;
         }, 2000);
     };
-    this.activateInvin = function(){
-        get("player").style.opacity = "0.3";
+    this.activateInvin = function(p){
+        get(p.name).style.opacity = "0.3";
         setTimeout(function(){
-            x_invin = false;
-            get("player").style.opacity = "1";
+            p.x_invin = false;
+            get(p.name).style.opacity = "1";
         }, 1500);
     };
     this.kill = function(){
-        if(!x_invin){
+        if(!this.x_invin){
             this.isAlive = false;
             clearInterval(zz);
             get("game_text").style.visibility = "visible";

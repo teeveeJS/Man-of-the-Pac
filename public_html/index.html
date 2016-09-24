@@ -16,9 +16,10 @@
         <script src="randomPoint.js"></script>
         <script src="powers_totalScore.js"></script>
         <script src="newgame.js"></script>
+        <script src="distance.js"></script>
         
         <script>
-            var player;
+            var players = [];
             var ghosts = [];
             var size = 10;
             var coins = [];
@@ -28,25 +29,15 @@
             var zz;
             var ghost_speed = 2;
             var pm;
-            var isKeyDown = false;
-            var keyDown;
             var speed = 50;//determines tick speed
-            var z_boost;
-            var boost_count;
-            var boost_used;
-            var x_invin;
-            var invin_count;
-            var invin_used;
             var map = {};
+            var multip = false;
             
             function get(id){
                 return document.getElementById(id);
             }
             
             clock = new timer(100);
-            
-            document.addEventListener("keydown", startMoving, false);
-            document.addEventListener("keyup", stopMoving, false);
             
             window.onload = function(){
                 createField(size);
@@ -58,18 +49,30 @@
                 //for every 1 second, count increases by 20 -> 20 ticks/sec
                 
                 //does not take into account the ghosts' frequencies
+                //use distance to determine which player to chase
                 for(i=0; i<ghosts.length; i++){
-                    ghosts[i].move(ghosts[i], player);
+                    var current = distance(players[0], ghosts[i]);
+                    var index = 0;
+                    for(j=0;j<players.length;j++){
+                        if(distance(players[j], ghosts[i]) > current){
+                            current = distance(players[j], ghosts[i]);
+                            index = j;
+                        }
+                    }
+                    ghosts[i].move(ghosts[i], players[index]);
                 }
                 if(count % 10 === 0){
                     randomPoint(coins);
                 }
-                if(count % 800 === 0){
+                if(count % 600 === 0){
                     ghostGen(player, ghosts);
+                    //needs fixing for multip
                 }
-                if(isKeyDown){
-                    player.move(map, coins);
-                    player.loadCharacter();
+                
+                for(i=0;i<players.length;i++){
+                    if(players[i].isKeyDown){
+                        players[i].move(map, coins);
+                    }
                 }
             }
             
@@ -80,30 +83,25 @@
             
             /*TODO
              * Obstacles HOW would the maze be generated?
-             * Finish moving all updating to update(): DONE
              * Implement ghost.frequency
-             * Detect multiple key presses at once (to enable diagonal movement)
-             * OR Only one click required for continuous movement. Direction will change on another keypress. player.move would be in update(): DONE
              * Expiration time for coins OR another PacMan that eats the coins & can kill the player
-             * Speed boost coins? Invincibility coins?: DONE
-             * Ctrl and Shift effects? -> invin and boost from z and x: DONE
              * Difficulty
              * Better playing character movement (currently choppy)
              * If time > 60, convert to minutes
+             * Generate a coin if there are none
              * 
              * 
              * BUGS
-             * when the first additional ghost is loaded, the first one becomes invisible/disappears: FIXED
-             * ghost movement speed too unbalanced: FIXED (kinda)
              * Timer and randomPoint() run even when the window isn't active. Ghost stops
-             * Lag in player movement: FIXED
-             * Boost allows player to go slightly beyond the field: FIXED
-             * Bad bounding box for coins: FIXED
-             * player stops moving when a special power is activated: FIXED
              * 
              */
         </script>
         <button id="start" onclick="start_game()">Start</button>
+        <div id="multip">
+            <input type="checkbox" onclick="multip = !multip;">
+            Multiplayer
+        </div>
+        
         <div id="score" class="top">0</div>
         <div id="time" class="top"></div>
         <div id="game_text" class="top">Game Over!</div>

@@ -1,17 +1,19 @@
-function start_game(){
+function start_game(){    
+    document.addEventListener("keydown", startMoving, false);
+    document.addEventListener("keyup", stopMoving, false);
+    
     init_div();
     remove_coins();
+    
+    ghosts = [];
 
-    z_boost = false;
-    boost_count = 3;
-    boost_used = 0;
-    x_invin = false;
-    invin_count = 3;
-    invin_used = 0;            
-
-    player = new PlayerCharacter("default", 10, 50, 50, 100);
+    players[0] = new PlayerCharacter("teemu", 10, 50, 50, 100, [37, 38, 39, 40, 90, 88]);
+    players[0].loadCharacter();
+    if(multip){
+        players[1] = new PlayerCharacter("p2", 10, 450, 50, 100, [65, 87, 68, 83, 81, 69]);
+        players[1].loadCharacter();
+    }
     ghosts[0] = new ghost("ghost0", 500, 500, ghost_speed, 100);//frequency currently not implemented
-    player.loadCharacter();
     ghosts[0].loadGhost();
     clock.start();
     zz = setInterval(update, speed);

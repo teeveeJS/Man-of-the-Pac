@@ -2,15 +2,19 @@ function startMoving(e){
     var k = e.keyCode;
     map[k] = e.type === "keydown";
     //allows for multiple key presses
-    if(player.isAlive){
-        isKeyDown = true;
+    for(i=0;i<players.length;i++){
+        if(players[i].isAlive){
+            players[i].isKeyDown = true;
+        }
     }
 }
 
 function stopMoving(e){
     var k = e.keyCode;
     map[k] = e.type === "keydown";
-    if(map[90] || map[88]){
-        isKeyDown = false;
+    for(i=0;i<players.length;i++){
+        if(map[players[i].controls[4]] || map[players[i].controls[5]]){
+            players[i].isKeyDown = false;
+        }
     }
 };

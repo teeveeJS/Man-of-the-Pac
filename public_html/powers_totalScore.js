@@ -1,5 +1,5 @@
 function updatePowers(){
-    get("powers").innerHTML = "Boosts: " + boost_count + "<br/>" + "Invins: " + invin_count;
+    get("powers").innerHTML = "Boosts: " + players[0].boost_count + "<br/>" + "Invins: " + players[0].invin_count;
 }
 
 function totalScore(){
@@ -13,18 +13,18 @@ function totalScore(){
     }
     total_score = parseInt(coin_score)
             + Math.round(parseInt(time)/2)
-            + parseInt(invin_count)*3
-            + parseInt(invin_used)*10
-            + parseInt(boost_count)*2
-            + parseInt(boost_used)*5
+            + parseInt(players[0].invin_count)*3
+            + parseInt(players[0].invin_used)*10
+            + parseInt(players[0].boost_count)*2
+            + parseInt(players[0].boost_used)*5
             + pps
-            + Math.round(player.dist/500);
+            + Math.round(players[0].dist/500);
     get("t_coin").innerHTML = coin_score;
     get("t_time").innerHTML = Math.round(time/2);
     get("t_pps").innerHTML = pps;
-    get("t_boost").innerHTML = boost_count*2 + boost_used*5;
-    get("t_invin").innerHTML = invin_count*3 + invin_used*10;
-    get("t_dist").innerHTML = Math.round(player.dist/500);
+    get("t_boost").innerHTML = players[0].boost_count*2 + players[0].boost_used*5;
+    get("t_invin").innerHTML = players[0].invin_count*3 + players[0].invin_used*10;
+    get("t_dist").innerHTML = Math.round(players[0].dist/500);
     get("t_total").innerHTML = total_score;
     return total_score;
 };
