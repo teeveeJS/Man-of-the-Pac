@@ -1,4 +1,4 @@
-function PlayerCharacter(name, /*hp,*/ speed, x, y, ctrl){
+function PlayerCharacter(name, /*hp,*/ speed, x, y, p_index, ctrl){
     this.name = name;
     this.isAlive = true;
     this.score = 0;
@@ -7,6 +7,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, ctrl){
     this.controls = ctrl; //an array containing the keycodes
     this.x = x;
     this.y = y;
+    this.index = p_index;
     this.dist = 0;
     this.z_boost = false;
     this.boost_count = 3;
@@ -91,7 +92,7 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, ctrl){
                 } else {
                     this.score += point_arr[i].value;
                 }
-                get("score").innerHTML = this.score;
+                get("score"+this.index).innerHTML = this.score;
                 point_arr[i].removeCoin();
                 point_arr.splice(i, 1);
             }

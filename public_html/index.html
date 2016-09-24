@@ -32,6 +32,7 @@
             var speed = 50;//determines tick speed
             var map = {};
             var multip = false;
+            var p_index = 0;
             
             function get(id){
                 return document.getElementById(id);
@@ -111,9 +112,10 @@
             Multiplayer
         </div>
         
-        <div id="score" class="top">0</div>
+        <div id="score0" class="top">0</div>
+        <div id="score1" class="top">0</div>
         <div id="time" class="top"></div>
-        <div id="game_text" class="top">Game Over!</div>
+        <div id="game_text">Game Over!</div>
         <div id="powers" class="side"></div>
         <table id="player0" class="side" border="1">
             <thead>

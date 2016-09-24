@@ -11,11 +11,13 @@ function start_game(){
     ghosts = [];
     players = [];
 
-    players[0] = new PlayerCharacter("teemu", 10, 50, 50, [37, 38, 39, 40, 90, 88]);
-    players[0].loadCharacter();
+    players[p_index] = new PlayerCharacter("teemu", 10, 50, 50, p_index, [37, 38, 39, 40, 90, 88]);
+    players[p_index].loadCharacter();
+    p_index++;
     if(multip){
-        players[1] = new PlayerCharacter("p2", 10, 450, 50, [65, 87, 68, 83, 81, 69]);
-        players[1].loadCharacter();
+        players[p_index] = new PlayerCharacter("p2", 10, 450, 50, p_index, [65, 87, 68, 83, 81, 69]);
+        players[p_index].loadCharacter();
+        get("score1").style.visibility = "visible";
     }
     ghosts[0] = new ghost("ghost0", 500, 500, ghost_speed, 100);//frequency currently not implemented
     ghosts[0].loadGhost();
@@ -30,7 +32,7 @@ function init_div(){
     get("game_text").style.visibility = "hidden";
     get("player0").style.visibility = "hidden";
     get("player1").style.visibility = "hidden";
-    get("score").innerHTML = 0;
+    get("score0").innerHTML = 0;
     get("time").innerHTML = null;
     for(i=0;i<players.length;i++){
         get("t_coin"+i).innerHTML = null;
