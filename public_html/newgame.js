@@ -6,10 +6,17 @@ function start_game(){
     remove_coins();
     if(players[1] !== undefined){
         document.body.removeChild(get(players[1].name));
-    }    
+    }
+    for(i=0;i<ghosts.length;i++){
+        if(ghosts[i] !== undefined){
+            document.body.removeChild(get(ghosts[i].name));
+        }
+    }
     
     ghosts = [];
+    ghost_speed = 2;
     players = [];
+    p_index = 0;
 
     players[p_index] = new PlayerCharacter("teemu", 10, 50, 50, p_index, [37, 38, 39, 40, 90, 88]);
     players[p_index].loadCharacter();
@@ -33,6 +40,7 @@ function init_div(){
     get("player0").style.visibility = "hidden";
     get("player1").style.visibility = "hidden";
     get("score0").innerHTML = 0;
+    get("score1").innerHTML = 0;
     get("time").innerHTML = null;
     for(i=0;i<players.length;i++){
         get("t_coin"+i).innerHTML = null;

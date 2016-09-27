@@ -25,10 +25,5 @@ function coin(value){
         if(get(this.id).hasChildNodes()){
             get(this.id).removeChild(get(this.id+"coin"));
         };
-        /*
-        delete this.x;
-        delete this.y;
-        delete this.id;
-        delete this.value;*/
     };
 }
