@@ -59,12 +59,13 @@
                             current = distance(players[j].x, players[j].y, ghosts[i].x, ghosts[i].y);
                             index = j;
                         }
-                    }
+                    }                    
                     ghosts[i].moveGhost(ghosts[i], players[index]);
                 }
                 if(count % 10 === 0){
                     randomPoint(coins);
                 }
+                
                 if(count % 600 === 0){
                     ghostGen(players, ghosts);
                 }
