@@ -52,11 +52,11 @@
                 //does not take into account the ghosts' frequencies
                 //use distance to determine which player to chase
                 for(i=0; i<ghosts.length; i++){
-                    var current = distance(players[0], ghosts[i]);
+                    var current = distance(players[0].x, players[0].y, ghosts[i].x, ghosts[i].y);
                     var index = 0;
                     for(j=0;j<players.length;j++){
-                        if(distance(players[j], ghosts[i]) < current){
-                            current = distance(players[j], ghosts[i]);
+                        if(distance(players[j].x, players[j].y, ghosts[i].x, ghosts[i].y) < current){
+                            current = distance(players[j].x, players[j].y, ghosts[i].x, ghosts[i].y);
                             index = j;
                         }
                     }
@@ -65,11 +65,9 @@
                 if(count % 10 === 0){
                     randomPoint(coins);
                 }
-                /*
                 if(count % 600 === 0){
-                    ghostGen(player, ghosts);
-                    //needs fixing for multip
-                }*/
+                    ghostGen(players, ghosts);
+                }
                 
                 if(players[0].isKeyDown){
                     players[0].movePlayer(map, coins);
