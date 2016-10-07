@@ -29,23 +29,22 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, p_index, ctrl){
         p.style.marginLeft = this.x + "px";
     };
     this.movePlayer = function(map, arr){
-                        //uncomment to move only inside squares
-        if(map[this.controls[0]] /*&& T%50 === 0*/ && this.x > 50){
+        if(map[this.controls[0]] && this.x > 50){
             //left
             this.x -= this.speed;
             this.dist += this.speed;
         }
-        if(map[this.controls[1]] && /*L%50 === 0 &&*/ this.y > 50){
+        if(map[this.controls[1]] && this.y > 50){
             //up
             this.y -= this.speed;
             this.dist += this.speed;
         }
-        if(map[this.controls[2]] && /*T%50 === 0 &&*/ this.x < 500){
+        if(map[this.controls[2]] && this.x < 500){
             //right
             this.x += this.speed;
             this.dist += this.speed;
         }
-        if(map[this.controls[3]] && /*L%50 === 0 &&*/ this.y < 500){
+        if(map[this.controls[3]] && this.y < 500){
             //down
             this.y += this.speed;
             this.dist += this.speed;

@@ -23,6 +23,11 @@ function totalScore(){
             time = 2;
             pps = 0;
         }
+        if(players[i].isAlive){
+            death_p = death_penalty;
+        } else {
+            death_p = 0;
+        };
         total_score = parseInt(coin_score)
                 + Math.round(parseInt(time)/2)
                 + parseInt(players[i].invin_count)*3
@@ -30,13 +35,15 @@ function totalScore(){
                 + parseInt(players[i].boost_count)*2
                 + parseInt(players[i].boost_used)*5
                 + pps
-                + Math.round(players[i].dist/500);
+                + Math.round(players[i].dist/500)
+                + death_p;
         get("t_coin"+i).innerHTML = coin_score;
         get("t_time"+i).innerHTML = Math.round(time/2);
         get("t_pps"+i).innerHTML = pps;
         get("t_boost"+i).innerHTML = players[i].boost_count*2 + players[i].boost_used*5;
         get("t_invin"+i).innerHTML = players[i].invin_count*3 + players[i].invin_used*10;
         get("t_dist"+i).innerHTML = Math.round(players[i].dist/500);
+        get("t_death"+i).innerHTML = death_p;
         get("t_total"+i).innerHTML = total_score;
     }
     

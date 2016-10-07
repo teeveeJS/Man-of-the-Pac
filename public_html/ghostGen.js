@@ -11,7 +11,7 @@ function ghostRandCoord(p_arr){
     for(i=0;i<p_arr.length;i++){
         if(distance(p_arr.x, p_arr.y, ghost_x, ghost_y) < 100){
             ghostRandCoord(p_arr);
-            break;
+            //break;
         } else {
             return [ghost_x, ghost_y];
         }
