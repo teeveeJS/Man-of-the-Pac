@@ -112,16 +112,9 @@ function PlayerCharacter(name, /*hp,*/ speed, x, y, p_index, ctrl){
         }, 1500);
     };
     this.kill = function(){
-        if(!this.x_invin){
+        if(!this.x_invin && this.isAlive){
             this.isAlive = false;
-            clearInterval(zz);
-            get("game_text").style.visibility = "visible";
-            get("start").style.visibility = "visible";
-            get("multip").style.visibility = "visible";
-            get("player0").style.visibility = "visible";
-            if(multip){
-                get("player1").style.visibility = "visible";
-            }
+            reset();
             totalScore();
         };        
     };

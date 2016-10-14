@@ -21,6 +21,7 @@
         <script>
             var players = [];
             var ghosts = [];
+            var num_ghosts = 1;
             var size = 10;
             var coins = [];
             var clock;
@@ -52,10 +53,10 @@
                 
                 //does not take into account the ghosts' frequencies
                 //use distance to determine which player to chase
-                for(i=0; i<ghosts.length; i++){
-                    var current = distance(players[0].x, players[0].y, ghosts[i].x, ghosts[i].y);
+                for(var i=0; i<ghosts.length; i++){
+                    var current = Math.sqrt(Math.pow(players[0].x - players[0].y, 2) + Math.pow(ghosts[i].x - ghosts[i].y, 2));
                     var index = 0;
-                    for(j=0;j<players.length;j++){
+                    for(var j=0;j<players.length;j++){
                         if(distance(players[j].x, players[j].y, ghosts[i].x, ghosts[i].y) < current){
                             current = distance(players[j].x, players[j].y, ghosts[i].x, ghosts[i].y);
                             index = j;
@@ -71,7 +72,7 @@
                 }
                 
                 if(count % 100 === 0){
-                    ghostGen(players, ghosts);
+                    ghostGen(players);
                 }
                 
                 if(players[0].isKeyDown){
@@ -186,5 +187,7 @@
                 </tr>
             </tbody>
         </table>
+        
+        <div id="drop-down"></div>
     </body>
 </html>
