@@ -12,13 +12,20 @@ function start_game(){
             document.body.removeChild(get(ghosts[i].name));
         }
     }
+
     
+<<<<<<< HEAD
     death_penalty = 10;
+=======
+        
+>>>>>>> 04f0cb7bb3a1baddeaace6b5682f374979f11086
     ghosts = [];
     ghost_speed = 2;
     players = [];
     p_index = 0;
-
+    num_ghosts = 1;
+    count = 0;
+    
     players[p_index] = new PlayerCharacter("teemu", 10, 50, 50, p_index, [37, 38, 39, 40, 90, 88]);
     players[p_index].loadCharacter();
     p_index++;
@@ -62,4 +69,16 @@ function remove_coins(){
             get(divID).innerHTML = null;
         }
     }
+}
+
+function reset(){
+    clearInterval(zz);
+    get("game_text").style.visibility = "visible";
+    get("start").style.visibility = "visible";
+    get("multip").style.visibility = "visible";
+    get("player0").style.visibility = "visible";
+    if(multip){
+        get("player1").style.visibility = "visible";
+    }
+    
 }

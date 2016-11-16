@@ -46,6 +46,4 @@ function totalScore(){
         get("t_death"+i).innerHTML = death_p;
         get("t_total"+i).innerHTML = total_score;
     }
-    
-    //return total_score;
 };
