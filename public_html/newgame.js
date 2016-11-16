@@ -13,6 +13,7 @@ function start_game(){
         }
     }
     
+    death_penalty = 10;
     ghosts = [];
     ghost_speed = 2;
     players = [];
