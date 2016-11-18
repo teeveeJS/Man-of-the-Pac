@@ -13,12 +13,8 @@ function start_game(){
         }
     }
 
-    
-<<<<<<< HEAD
     death_penalty = 10;
-=======
-        
->>>>>>> 04f0cb7bb3a1baddeaace6b5682f374979f11086
+    
     ghosts = [];
     ghost_speed = 2;
     players = [];
